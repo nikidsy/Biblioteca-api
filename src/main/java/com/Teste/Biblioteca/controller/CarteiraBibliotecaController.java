@@ -13,17 +13,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/carteiras")
 public class CarteiraBibliotecaController {
+        private final CarteiraBibliotecaService service;
 
-    private final CarteiraBibliotecaService service;
+        public CarteiraBibliotecaController(CarteiraBibliotecaService service) {
+            this.service = service;
+        }
 
-    public CarteiraBibliotecaController(CarteiraBibliotecaService service) {
-        this.service = service;
+        @PostMapping
+        public ResponseEntity<?> criarCarteira(@RequestBody CarteiraBibliotecaDTO dto) {
+            CarteiraBibliotecaDTO carteira = service.criarCarteira(dto);
+
+            if(carteira == null){
+                return ResponseEntity.badRequest().body("Usuário não encontrado para gerar carteira");
+            }
+
+            return ResponseEntity.status(201).body(carteira);
+        }
     }
-
-    @PostMapping
-    public ResponseEntity<CarteiraBibliotecaDTO> criarCarteira (@RequestBody CarteiraBibliotecaDTO dto) {
-        CarteiraBibliotecaDTO carteira = service.criarCarteira(dto);
-
-        return ResponseEntity.ok(carteira);
-    }
-}

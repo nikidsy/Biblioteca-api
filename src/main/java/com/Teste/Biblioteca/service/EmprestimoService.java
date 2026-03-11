@@ -32,14 +32,12 @@ public class EmprestimoService {
         }
 
         Usuario usuario = usuarioOptional.get();
-
         Emprestimo emprestimo = new Emprestimo();
         emprestimo.setUsuario(usuario);
         emprestimo.setDataEmprestimo(LocalDate.now());
         emprestimo.setDataDevolucao(LocalDate.now().plusDays(7));
 
         emprestimo = emprestimoRepository.save(emprestimo);
-
         dto.setId(emprestimo.getId());
         dto.setDataEmprestimo(emprestimo.getDataEmprestimo());
         dto.setDataDevolucao(emprestimo.getDataDevolucao());
@@ -57,6 +55,23 @@ public class EmprestimoService {
             dto.setDataEmprestimo(e.getDataEmprestimo());
             dto.setDataDevolucao(e.getDataDevolucao());
             dto.setUsuarioId(e.getUsuario().getId());
+            lista.add(dto);
+        }
+
+        return lista;
+    }
+
+    public List<EmprestimoDTO> lisarPorUsuario(Long usuarioId){
+        List<Emprestimo> emprestimos = emprestimoRepository.findByUsuarioId(usuarioId);
+        List<EmprestimoDTO> lista = new ArrayList<>();
+
+        for(Emprestimo e : emprestimos){
+            EmprestimoDTO dto = new EmprestimoDTO();
+            dto.setId(e.getId());
+            dto.setDataEmprestimo(e.getDataEmprestimo());
+            dto.setDataDevolucao(e.getDataDevolucao());
+            dto.setUsuarioId(e.getUsuario().getId());
+
             lista.add(dto);
         }
 

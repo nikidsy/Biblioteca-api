@@ -3,6 +3,7 @@ package com.Teste.Biblioteca.service;
 import com.Teste.Biblioteca.dto.UsuarioDTO;
 import com.Teste.Biblioteca.entities.Usuario;
 import com.Teste.Biblioteca.repositories.UsuarioRepository;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -63,4 +64,23 @@ public class UsuarioService {
         return dto;
     }
 
+    public UsuarioDTO atualizarUsuario(Long id, UsuarioDTO dto) {
+
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
+
+        if (usuarioOptional.isEmpty()){
+            return null;
+        }
+
+        Usuario usuario = usuarioOptional.get();
+        usuario.setNome(dto.getNome());
+        usuario.setEmail(dto.getEmail());
+        usuario = usuarioRepository.save(usuario);
+
+        return new UsuarioDTO(usuario.getId(), usuario.getNome(), usuario.getEmail());
+    }
+
+    public  void deletarUsuario(Long id){
+        usuarioRepository.deleteById(id);
+    }
 }

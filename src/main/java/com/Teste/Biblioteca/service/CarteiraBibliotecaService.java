@@ -31,17 +31,6 @@ public class CarteiraBibliotecaService {
         }
 
         Usuario usuario = usuarioOptional.get();
-
-        if (usuario.getCarteiraBiblioteca() != null) {
-            CarteiraBiblioteca existente = usuario.getCarteiraBiblioteca();
-            dto.setNumeroCarteira(existente.getNumeroCarteira());
-            dto.setDataEmissao(existente.getDataEmissao());
-            dto.setIsValid(existente.isValid());
-            dto.setUsuarioId(usuario.getId());
-
-            return dto;
-        }
-
         CarteiraBiblioteca carteira = new CarteiraBiblioteca();
         carteira.setUsuario(usuario);
         carteira.setNumeroCarteira(usuario.getId());
@@ -50,14 +39,6 @@ public class CarteiraBibliotecaService {
 
         carteira = carteiraBibliotecaRepository.save(carteira);
 
-        usuario.setCarteiraBiblioteca(carteira);
-
-        CarteiraBibliotecaDTO resposta = new CarteiraBibliotecaDTO();
-        resposta.setNumeroCarteira(carteira.getNumeroCarteira());
-        resposta.setDataEmissao(carteira.getDataEmissao());
-        resposta.setIsValid(carteira.isValid());
-        resposta.setUsuarioId(usuario.getId());
-
-        return resposta;
+        return new CarteiraBibliotecaDTO(carteira.getNumeroCarteira(), carteira.getDataEmissao(), carteira.isValid(), usuario.getId());
     }
 }
