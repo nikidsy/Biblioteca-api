@@ -46,7 +46,7 @@ public class UsuarioService {
         return lista;
     }
 
-    public UsuarioDTO BuscaId(Long id) {
+    public UsuarioDTO BuscaIdUsuario(Long id) {
 
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
 
