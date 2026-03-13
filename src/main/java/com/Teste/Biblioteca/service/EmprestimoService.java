@@ -61,7 +61,7 @@ public class EmprestimoService {
         return lista;
     }
 
-    public List<EmprestimoDTO> lisarPorUsuario(Long usuarioId){
+    public List<EmprestimoDTO> listarPorUsuario(Long usuarioId){
         List<Emprestimo> emprestimos = emprestimoRepository.findByUsuarioId(usuarioId);
         List<EmprestimoDTO> lista = new ArrayList<>();
 

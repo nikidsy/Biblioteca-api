@@ -2,6 +2,7 @@ package com.Teste.Biblioteca.controller;
 
 import com.Teste.Biblioteca.dto.UsuarioDTO;
 import com.Teste.Biblioteca.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class UsuarioController {
         }
 
         @PostMapping
-        public ResponseEntity<?> criarUsuario(@RequestBody UsuarioDTO dto) {
+        public ResponseEntity<?> criarUsuario(@Valid @RequestBody UsuarioDTO dto) {
             UsuarioDTO usuario = service.criarUsuario(dto);
             return ResponseEntity.status(201).body(usuario);
         }
@@ -30,7 +31,7 @@ public class UsuarioController {
 
         @GetMapping("/{id}")
         public ResponseEntity<?> buscarUsuario(@PathVariable Long id) {
-            UsuarioDTO usuario = service.BuscaId(id);
+            UsuarioDTO usuario = service.BuscaIdUsuario(id);
 
             if(usuario == null){
                 return ResponseEntity.status(404).body("Usuário não encontrado");
@@ -40,7 +41,7 @@ public class UsuarioController {
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<?> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO dto){
+        public ResponseEntity<?> atualizarUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioDTO dto){
             UsuarioDTO usuario = service.atualizarUsuario(id, dto);
 
             if(usuario == null){
@@ -53,7 +54,7 @@ public class UsuarioController {
         @DeleteMapping("/{id}")
         public ResponseEntity<?> deletarUsuario(@PathVariable Long id){
 
-            UsuarioDTO usuario = service.BuscaId(id);
+            UsuarioDTO usuario = service.BuscaIdUsuario(id);
 
             if(usuario == null){
                 return ResponseEntity.status(404).body("Usuário não encontrado para exclusão");

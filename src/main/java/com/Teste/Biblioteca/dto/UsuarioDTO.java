@@ -1,6 +1,6 @@
 package com.Teste.Biblioteca.dto;
 
-import jakarta.validation.contains.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,10 +1,9 @@
 package com.Teste.Biblioteca.controller;
 
 import com.Teste.Biblioteca.dto.CarteiraBibliotecaDTO;
-import com.Teste.Biblioteca.dto.UsuarioDTO;
 import com.Teste.Biblioteca.service.CarteiraBibliotecaService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,7 @@ public class CarteiraBibliotecaController {
         }
 
         @PostMapping
-        public ResponseEntity<?> criarCarteira(@RequestBody CarteiraBibliotecaDTO dto) {
+        public ResponseEntity<?> criarCarteira(@Valid @RequestBody CarteiraBibliotecaDTO dto) {
             CarteiraBibliotecaDTO carteira = service.criarCarteira(dto);
 
             if(carteira == null){

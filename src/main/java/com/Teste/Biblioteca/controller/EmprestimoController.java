@@ -2,6 +2,7 @@ package com.Teste.Biblioteca.controller;
 
 import com.Teste.Biblioteca.dto.EmprestimoDTO;
 import com.Teste.Biblioteca.service.EmprestimoService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class EmprestimoController {
         }
 
         @PostMapping
-        public ResponseEntity<?> criarEmprestimo(@RequestBody EmprestimoDTO dto) {
+        public ResponseEntity<?> criarEmprestimo(@Valid @RequestBody EmprestimoDTO dto) {
             EmprestimoDTO emprestimo = service.criarEmprestimo(dto);
 
             if(emprestimo == null){
@@ -35,7 +36,7 @@ public class EmprestimoController {
 
         @GetMapping("/usuario/{id}")
         public ResponseEntity<List<EmprestimoDTO>> listarPorUsuario(@PathVariable Long id){
-            List<EmprestimoDTO> lista = service.lisarPorUsuario(id);
+            List<EmprestimoDTO> lista = service.listarPorUsuario(id);
 
             return ResponseEntity.ok(lista);
         }
