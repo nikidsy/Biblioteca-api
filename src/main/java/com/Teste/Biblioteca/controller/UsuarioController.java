@@ -24,12 +24,12 @@ public class UsuarioController {
         }
 
         @GetMapping
-        public ResponseEntity<List<UsuarioDTO>> listar() {
+        public ResponseEntity<List<UsuarioDTO>> listarUsuario() {
             return ResponseEntity.ok(service.listarUsuarios());
         }
 
         @GetMapping("/{id}")
-        public ResponseEntity<?> buscar(@PathVariable Long id) {
+        public ResponseEntity<?> buscarUsuario(@PathVariable Long id) {
             UsuarioDTO usuario = service.BuscaId(id);
 
             if(usuario == null){
@@ -40,7 +40,7 @@ public class UsuarioController {
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<?> atualizar(@PathVariable Long id, @RequestBody UsuarioDTO dto){
+        public ResponseEntity<?> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO dto){
             UsuarioDTO usuario = service.atualizarUsuario(id, dto);
 
             if(usuario == null){
@@ -51,7 +51,7 @@ public class UsuarioController {
         }
 
         @DeleteMapping("/{id}")
-        public ResponseEntity<?> deletar(@PathVariable Long id){
+        public ResponseEntity<?> deletarUsuario(@PathVariable Long id){
 
             UsuarioDTO usuario = service.BuscaId(id);
 
