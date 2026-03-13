@@ -1,5 +1,6 @@
 package com.Teste.Biblioteca.dto;
 
+import jakarta.validation.contains.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,10 @@ import java.time.LocalDate;
 public class UsuarioDTO {
 
     private Long id;
+
+    @NotBlank(message = "O nome é obrigatório")
     private String nome;
+
+    @NotBlank(message = "O email é obrigatório")
     private String email;
 }
