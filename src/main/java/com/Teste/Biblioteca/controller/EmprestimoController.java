@@ -18,7 +18,7 @@ public class EmprestimoController {
         }
 
         @PostMapping
-        public ResponseEntity<?> criar(@RequestBody EmprestimoDTO dto) {
+        public ResponseEntity<?> criarEmprestimo(@RequestBody EmprestimoDTO dto) {
             EmprestimoDTO emprestimo = service.criarEmprestimo(dto);
 
             if(emprestimo == null){
@@ -29,7 +29,7 @@ public class EmprestimoController {
         }
 
         @GetMapping
-        public ResponseEntity<List<EmprestimoDTO>> listar() {
+        public ResponseEntity<List<EmprestimoDTO>> listarEmprestimo() {
             return ResponseEntity.ok(service.listarEmprestimos());
         }
 
